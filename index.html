@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个 vue html</title>
+<!--    <link rel="stylesheet" href="/VueYvan/assets/libs/iview/iview.css">-->
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <link rel="stylesheet" href="/VueYvan/assets/css/main.css">
+    <style>
+        .el-timeline {
+            margin: 14px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <template>
+        <Row>
+            <i-col :xs="2" :sm="4" :md="6" :lg="8">i-col</i-col>
+            <i-col :xs="20" :sm="16" :md="12" :lg="8">i-col</i-col>
+            <i-col :xs="2" :sm="4" :md="6" :lg="8">i-col</i-col>
+        </Row>
+    </template>
+</div>
+
+<script src="/VueYvan/assets/libs/vue/vue.js"></script>
+<script src="/VueYvan/assets/libs/iview/iview.js"></script>
+<script src="/VueYvan/assets/js/main.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {}
+    })
+
+    var chioce = _g().getWidgetByName("comboBox0_c").getValue();
+    switch (chioce) {
+        case "PBL":
+            window.location = FR.cjkEncode("${servletURL}?formlet=MES_PCFalse.frm");
+            break;
+        case "PBK":
+            alert("您选择的选项是目前所展示的数据中心！请选择其他线体！")
+            break;
+        default:
+            alert("您选择的线体暂无数据！")
+    }
+</script>
+</body>
+</html>
