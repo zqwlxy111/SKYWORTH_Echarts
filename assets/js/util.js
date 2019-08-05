@@ -18,7 +18,7 @@ function getCookie(c_name)
 window.global = { userIdentity: JSON.parse(getCookie("useridentity"))};
 window.util = {
 
-    requestPost: function (url, data, cb) {
+    requestpost: function (url, data, cb) {
         if (!url) return;
         if (url[0] != '/' && url[0] != '\\') url = "/" + url;
         //console.log("开始请求！"+e.url);
@@ -42,15 +42,14 @@ window.util = {
                 else{}
                     // alert(msg.msg);
             }
-        });
+        })
     },
 
-    requestGet: function (url, cb) {
+    requestget: function (url, cb) {
         if (!url) return;
         if (url[0] != '/' && url[0] != '\\') url = "/" + url;
-
         $.ajax({
-            url: 'http://172.20.248.220:8088/qxf' + url,
+            url: 'http://172.20.248.220:8088/qxf'+url,
             headers: {
                 token: global.userIdentity.token,
                 user: global.userIdentity.user.id,
@@ -60,13 +59,14 @@ window.util = {
             method: 'get',
             success: function (msg) {
                 if (msg.success) {
+                    console.log(msg);
                     if (cb) cb(msg);
                 }
                 else{}
                 // alert(msg.msg);
             },
-        });
-    }
+        })
+    },
 };
 
 

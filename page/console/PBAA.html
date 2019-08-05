@@ -212,6 +212,9 @@
             changge:function (sta) {
                 vm.linename = sta.label;
                 console.log(sta.label);
+                util.requestget('/mes/kb/getCurrenMesOrderByLineCode?lineCode=1100&mesOrderId=073110200002613601',function (e) {
+                    console.log(e);
+                })
                 /*$.ajax({
                     url: url+'/mes/kb/getCurrenMesOrderByLineCode?lineCode=1100&mesOrderId=073110200002613601',
                     headers: {
@@ -240,31 +243,9 @@
                         console.log(vm.jibenxinxi.order);
                     });*/
                 // 请求线长
-                util.requestGet('/safe_usercenter/base/getLineByFactoryCode?code=1100',function (e) {
+                util.requestget('/safe_usercenter/base/getLineByFactoryCode?code=1100',function (e) {
                     console.log(e);
                 })
-                /*$.ajax({
-                    url: url+'/safe_usercenter/base/getLineByFactoryCode?code=1100',
-                    headers: {
-                        token: global.userIdentity.token,
-                        user: global.userIdentity.user.id,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    method: 'get',
-                    success: function (msg) {
-                        if (msg.success) {
-                            console.log(msg);
-                        }
-                        else{}
-                        // alert(msg.msg);
-                    },
-                });*/
-                /*$.get(url+'/safe_usercenter/base/getLineByFactoryCode?code=1100',
-                    function (m) {
-                        console.log(m);
-                    });
-*/
             }
         }
     })

@@ -52,26 +52,4 @@ function getProjectUrl() {
     }
     return layuiDir.substring(0, layuiDir.indexOf('assets'));
 }
-setTimeout(1);
-
-// 时间格式化
-function getMyDate(str) {
-    var oDate = new Date(str),
-        oYear = oDate.getFullYear(),
-        oMonth = oDate.getMonth()+1,
-        oDay = oDate.getDate(),
-        oHour = oDate.getHours(),
-        oMin = oDate.getMinutes(),
-        oSen = oDate.getSeconds(),
-        /*oTime = oYear +'-'+ addZero(oMonth) +'-'+ addZero(oDay) +' '+ addZero(oHour) +':'+
-            addZero(oMin) +':'+addZero(oSen);*/
-        oTime = oYear +'-'+ addZero(oMonth) +'-'+ addZero(oDay);
-    return oTime;
-}
-//补零操作
-function addZero(num){
-    if(parseInt(num) < 10){
-        num = '0'+num;
-    }
-    return num;
-}
+// setTimeout(1);
