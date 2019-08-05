@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>EasyWeb后台开发框架</title>
+    <script>
+        function getDateDemo() {
+            //分别获取年、月、日、时、分、秒
+            var myDate = new Date();
+            var year = myDate.getFullYear();
+            var month = myDate.getMonth() + 1;
+            var date = myDate.getDate();
+            var hours = myDate.getHours();
+            var minutes = myDate.getMinutes();
+            var seconds = myDate.getSeconds();
+            //月份的显示为两位数字如09月
+            if (month < 10) {
+                month = "0" + month;
+            }
+            if (date < 10) {
+                date = "0" + date;
+            }
+            //时间拼接
+            var dateTime = year + "年" + month + "月" + date + "日" + hours + "时" + minutes + "分" + seconds + "秒";
+            //document.write(dateTime);//打印当前时间
+            var divNode = document.getElementById("time");
+            divNode.innerHTML = dateTime;
+        }
+
+        window.setInterval("getDateDemo()", 1000);//每隔1秒，调用一次getDateDemo()
+    </script>
+
+    <!--    iview-css-->
+    <link rel="stylesheet" href="/SKYWORTH_Echarts/assets/libs/iview/iview.css"/>
+
+    <!--    iview-icon-->
+    <link href="https://cdn.bootcss.com/ionicons/4.0.0-2/css/ionicons.css" rel="stylesheet">
+
+    <!--    iview-bootcdn-->
+    <!--    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">-->
+
+    <!--    layui-css-->
+    <link rel="stylesheet" href="/SKYWORTH_Echarts/assets/libs/layui/css/layui.css"/>
+
+    <!--    admin-css-->
+    <!--    <link rel="stylesheet" href="/SKYWORTH_Echarts/assets/module/admin.css?v=312"/>-->
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="app">
+    <template>
+        <div style="background:#eee;padding: 10px">
+            <Row>
+                <i-col span="24">
+                    <Card>
+                        <div slot="title">
+                            <Row>
+                                <i-col span="3" style="line-height: 30px">
+                                    <i-select size="default" v-model="selected" :label-in-value="true" @on-change="changge">
+                                        <i-option v-for="line in line " :value="line.value" >
+                                            {{line.name}}
+                                        </i-option>
+                                    </i-select>
+                                </i-col>
+                                <i-col span="18" style="text-align: center;color:#000 ;font-size: 27px">平板厂{{linename}}实时生产信息看板
+                                </i-col>
+                                <i-col span="3">
+                                    <div id="time" style="line-height: 30px"></div>
+                                </i-col>
+                            </Row>
+                        </div>
+                        <Row style="margin-top: 10px">
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">工单号</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.order}}</div>
+                                </div>
+                            </i-col>
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">机型</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.machine}}</div>
+                                </div>
+                            </i-col>
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">排产量</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.plannum}}</div>
+                                </div>
+                            </i-col>
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">投入量</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.innum}}</div>
+                                </div>
+                            </i-col>
+                        </Row>
+                        <Row style="margin-top: 30px">
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">产出量</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.outnum}}</div>
+                                </div>
+                            </i-col>
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">线长</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.linema}}</div>
+                                </div>
+                            </i-col>
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">达成率</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.dachenglv}}</div>
+                                </div>
+                            </i-col>
+                            <i-col span="6" style="line-height: 30px">
+                                <div style="text-align: center">
+                                    <div style="color: rgba(0, 0, 0, .55); font-size: 14px">生产日期</div>
+                                    <div style="color: rgba(0, 0, 0, .85); font-size: 24px">{{jibenxinxi.productDate}}</div>
+                                </div>
+                            </i-col>
+                        </Row>
+                    </Card>
+                </i-col>
+            </Row>
+
+            <Row>
+                <i-col span="12" >
+                    <Card style="margin-top: 7px"></Card>
+                </i-col>
+                <i-col span="12">
+                    <Row>
+                        <i-col span="24">
+                            <Card style="margin-top: 7px; margin-left: 5px"></Card>
+                        </i-col>
+                        <i-col span="24">
+                            <Card style="margin-top: 5px; margin-left: 5px"></Card>
+                        </i-col>
+                        <i-col span="24">
+                            <Card style="margin-top: 5px; margin-left: 5px"></Card>
+                        </i-col>
+                    </Row>
+
+                </i-col>
+            </Row>
+        </div>
+    </template>
+</div>
+
+</body>
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_Echarts/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_Echarts/assets/libs/jquery/jquery.js"></script>
+<script src="/SKYWORTH_Echarts/assets/libs/vue/vue.js"></script>
+<!--<script src="//unpkg.com/iview/dist/iview.min.js"></script>-->
+<script type="text/javascript" src="/SKYWORTH_Echarts/assets/libs/iview/iview.js"></script>
+<script type="text/javascript" src="/SKYWORTH_Echarts/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_Echarts/assets/js/util.js"></script>
+
+<script>
+    // 时间格式化
+    function getMyDate(str) {
+        var oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds(),
+            /*oTime = oYear +'-'+ addZero(oMonth) +'-'+ addZero(oDay) +' '+ addZero(oHour) +':'+
+                addZero(oMin) +':'+addZero(oSen);*/
+            oTime = oYear +'-'+ addZero(oMonth) +'-'+ addZero(oDay);
+        return oTime;
+    }
+    //补零操作
+    function addZero(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
+    }
+</script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            visible: false,
+            line:[{name:'整机A线',value:'A'},{name:'整机B线',value:'B'}
+                ,{name:'整机C线',value:'C'},{name:'整机D线',value:'D'},
+                {name:'整机F线',value:'F'},{name:'整机G线',value:'G'},
+                {name:'智能一号线',value:'PBL'},{name:'智能二号线',value:'PBK'},
+                {name:'平板模组A线',value:'PBMA'},{name:'模组A线',value:'SMA'}],
+            linename: '',
+            jibenxinxi:{order:'',machine: '',plannum:'',innum:'',outnum:'',linema:'',dachenglv:'',productDate:''},
+            selected:'',
+        },
+        methods: {
+            show: function () {
+                this.visible = true;
+            },
+            changge:function (sta) {
+                vm.linename = sta.label;
+                console.log(sta.label);
+                /*$.ajax({
+                    url: url+'/mes/kb/getCurrenMesOrderByLineCode?lineCode=1100&mesOrderId=073110200002613601',
+                    headers: {
+                        token: global.userIdentity.token,
+                        user: global.userIdentity.user.id,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'get',
+                    success: function (msg) {
+                        if (msg.success) {
+                            console.log(msg);
+                        }
+                        else{}
+                        // alert(msg.msg);
+                    },
+                });*/
+                /*$.get(url+'/mes/kb/getCurrenMesOrderByLineCode?lineCode=1100&mesOrderId=073110200002613601',
+                    function (m) {
+                        // document.cookie = "useridentity=" + JSON.stringify(m) + ";expires=" + exp.toGMTString();
+                        console.log(m);
+                        var view = m.result.view;
+                        var date = getMyDate(parseInt(view.gstrp));
+                        console.log(date);
+                        vm.jibenxinxi = {order:view.id,machine:view.type,plannum:view.gamng,innum:view.tlmng,outnum:view.wgmng,linema:"邱晓峰",dachenglv:'100%',productDate:date }
+                        console.log(vm.jibenxinxi.order);
+                    });*/
+                // 请求线长
+                util.requestGet('/safe_usercenter/base/getLineByFactoryCode?code=1100',function (e) {
+                    console.log(e);
+                })
+                /*$.ajax({
+                    url: url+'/safe_usercenter/base/getLineByFactoryCode?code=1100',
+                    headers: {
+                        token: global.userIdentity.token,
+                        user: global.userIdentity.user.id,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'get',
+                    success: function (msg) {
+                        if (msg.success) {
+                            console.log(msg);
+                        }
+                        else{}
+                        // alert(msg.msg);
+                    },
+                });*/
+                /*$.get(url+'/safe_usercenter/base/getLineByFactoryCode?code=1100',
+                    function (m) {
+                        console.log(m);
+                    });
+*/
+            }
+        }
+    })
+
+
+</script>
+
+</html>
