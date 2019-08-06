@@ -65,6 +65,12 @@
         // 监听表单提交
         form.on('submit(login-submit)', function (obj) {
             // console.log(url);
+            /*var vv = '/safe_usercenter/safe/user/login?systemId=2&username=' + $(
+                "#username")
+            .val() + '&password=' + $("#password").val();
+            util.requestget(vv,function () {
+                alert("asdasdas");
+            })*/
             $.get('http://172.20.248.220:8088/qxf/safe_usercenter/safe/user/login?systemId=2&username=' + $(
                 "#username")
                 .val() + '&password=' + $("#password").val(),
