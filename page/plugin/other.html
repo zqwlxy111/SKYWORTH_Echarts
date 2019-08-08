@@ -315,5 +315,24 @@
 
     });
 </script>
+<script>
+    var chioce = _g().getWidgetByName("comboBox0_c").getValue();
+    switch (chioce) {
+        case "PBL":
+            alert("您选择的选项是目前所展示的数据中心！请选择其他线体！")
+            break;
+        case "PBK":
+            window.location = FR.cjkEncode("${servletURL}?formlet=PBK.frm");
+            break;
+        case "PBA":
+            window.location = FR.cjkEncode("${servletURL}?formlet=PBA.frm");
+            break;
+        case "PBD":
+            window.location = FR.cjkEncode("${servletURL}?formlet=PBD.frm");
+            break;
+        default:
+            alert("您选择的线体暂无数据！")
+    }
+</script>
 </body>
 </html>

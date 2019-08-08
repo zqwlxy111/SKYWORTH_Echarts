@@ -59,7 +59,7 @@ window.util = {
             method: 'get',
             success: function (msg) {
                 if (msg.success) {
-                    console.log(msg);
+                    // console.log(msg);
                     if (cb) cb(msg);
                 }
                 else{}
