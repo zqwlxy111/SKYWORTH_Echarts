@@ -80,7 +80,7 @@
                             time: 550
                         }, function () {
                             var exp = new Date();
-                            exp.setTime(exp.getTime() + 60 * 30000);
+                            exp.setTime(exp.getTime() + 24 * 60 * 60 * 1000);
                             m.functions = {};
                             window.m = m;
                             document.cookie = "useridentity=" + JSON.stringify(m) + ";expires=" + exp

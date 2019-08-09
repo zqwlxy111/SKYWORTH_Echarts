@@ -261,6 +261,22 @@
         });
 
     });
+
+    // 超时弹出登录界面
+    let myTime = setTimeout("Timeout()", 24 * 60 * 60 * 1000);
+
+    function resetTime() {
+        clearTimeout(myTime);
+        myTime = setTimeout('Timeout()', 24 * 60 * 60 * 1000);
+    }
+
+    function Timeout() {
+        alert("您的登录已超时, 请点确定后重新登录!");
+        document.location.href = 'login.html';
+    }
+
+    document.documentElement.onkeydown = resetTime;
+    document.doocumentElement.onclick = resetTime;
 </script>
 </body>
 </html>
