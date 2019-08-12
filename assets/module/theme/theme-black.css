@@ -11,6 +11,7 @@
 .layui-layout-admin .layui-header .layui-logo {
     background-color: #3A3D49;
     color: #eee;
+    box-shadow: none !important;
 }
 
 /** header样式 */

@@ -1,6 +1,6 @@
-﻿/** EasyWeb iframe v3.1.3 date:2019-07-12 License By http://easyweb.vip */
+/** EasyWeb iframe v3.1.4 date:2019-08-05 License By http://easyweb.vip */
 
-layui.define(["jquery", "layer"], function (f) {
+layui.define(["layer"], function (f) {
     var h = layui.jquery;
     var j = layui.layer;
     var a = ".layui-layout-admin>.layui-body";
@@ -11,10 +11,7 @@ layui.define(["jquery", "layer"], function (f) {
     var d = "admin-side-nav";
     var c = "theme-admin";
     var m = {
-        version: "313", 
-        defaultTheme: "theme-admin", 
-        tableName: "easyweb", 
-        flexible: function (n) {
+        version: "314", defaultTheme: "theme-admin", tableName: "easyweb", flexible: function (n) {
             if (window != top && !m.isTop()) {
                 if (top.layui && top.layui.admin) {
                     top.layui.admin.flexible(n);
@@ -31,41 +28,55 @@ layui.define(["jquery", "layer"], function (f) {
                     h(".layui-layout-admin").addClass("admin-nav-mini")
                 }
             }
-        }, activeNav: function (n) {
+        }, activeNav: function (o) {
             if (window != top && !m.isTop()) {
                 if (top.layui && top.layui.admin) {
-                    top.layui.admin.activeNav(n);
+                    top.layui.admin.activeNav(o);
                     return
                 }
             }
-            if (!n) {
-                n = window.location.pathname;
-                n = n.substring(n.indexOf("/"))
+            if (!o) {
+                o = window.location.pathname;
+                o = o.substring(o.indexOf("/"))
             }
-            if (n && n != "") {
-                h(e + ">.layui-nav .layui-nav-item .layui-nav-child dd").removeClass("layui-this");
-                h(e + ">.layui-nav .layui-nav-item").removeClass("layui-this");
-                var r = h(e + '>.layui-nav a[lay-href="' + n + '"]');
+            if (o && o != "") {
+                h(e + ">.layui-nav .layui-nav-item .layui-nav-child dd.layui-this").removeClass("layui-this");
+                h(e + ">.layui-nav .layui-nav-item.layui-this").removeClass("layui-this");
+                var r = h(e + '>.layui-nav a[lay-href="' + o + '"]');
                 if (r && r.length > 0) {
+                    var q = h(".layui-layout-admin").hasClass("admin-nav-mini");
                     if (h(e + ">.layui-nav").attr("lay-accordion") == "true") {
-                        h(e + ">.layui-nav .layui-nav-itemed").removeClass("layui-nav-itemed")
+                        var n = r.parent("dd").parents(".layui-nav-child");
+                        if (q) {
+                            h(e + ">.layui-nav .layui-nav-itemed>.layui-nav-child").not(n).css("display", "none")
+                        } else {
+                            h(e + ">.layui-nav .layui-nav-itemed>.layui-nav-child").not(n).slideUp("fast")
+                        }
+                        h(e + ">.layui-nav .layui-nav-itemed").not(n.parent()).removeClass("layui-nav-itemed")
                     }
                     r.parent().addClass("layui-this");
-                    r.parent("dd").parents(".layui-nav-child").parent().addClass("layui-nav-itemed");
+                    var s = r.parent("dd").parents(".layui-nav-child").parent();
+                    if (q) {
+                        s.not(".layui-nav-itemed").children(".layui-nav-child").css("display", "block")
+                    } else {
+                        s.not(".layui-nav-itemed").children(".layui-nav-child").slideDown("fast", function () {
+                            var t = r.offset().top + r.outerHeight() + 30 - m.getPageHeight();
+                            var u = 50 + 65 - r.offset().top;
+                            if (t > 0) {
+                                h(e).animate({"scrollTop": h(e).scrollTop() + t}, 100)
+                            } else {
+                                if (u > 0) {
+                                    h(e).animate({"scrollTop": h(e).scrollTop() - u}, 100)
+                                }
+                            }
+                        })
+                    }
+                    s.addClass("layui-nav-itemed");
                     h('ul[lay-filter="' + d + '"]').addClass("layui-hide");
                     var p = r.parents(".layui-nav");
                     p.removeClass("layui-hide");
                     h(i + ">.layui-nav>.layui-nav-item").removeClass("layui-this");
-                    h(i + '>.layui-nav>.layui-nav-item>a[nav-bind="' + p.attr("nav-id") + '"]').parent().addClass("layui-this");
-                    var o = r.offset().top + r.outerHeight() + 30 - m.getPageHeight();
-                    var q = 50 + 65 - r.offset().top;
-                    if (o > 0) {
-                        h(e).animate({"scrollTop": h(e).scrollTop() + o}, 100)
-                    } else {
-                        if (q > 0) {
-                            h(e).animate({"scrollTop": h(e).scrollTop() - q}, 100)
-                        }
-                    }
+                    h(i + '>.layui-nav>.layui-nav-item>a[nav-bind="' + p.attr("nav-id") + '"]').parent().addClass("layui-this")
                 } else {
                 }
             } else {
@@ -76,17 +87,14 @@ layui.define(["jquery", "layer"], function (f) {
                 n.title = false;
                 n.closeBtn = false
             }
-            if (n.anim == undefined) {
-                n.anim = 2
-            }
             if (n.fixed == undefined) {
                 n.fixed = true
             }
-            n.isOutAnim = false;
+            n.anim = -1;
             n.offset = "r";
             n.shadeClose = true;
             n.area || (n.area = "336px");
-            n.skin || (n.skin = "layui-layer-adminRight");
+            n.skin || (n.skin = "layui-anim layui-anim-rl layui-layer-adminRight");
             n.move = false;
             return m.open(n)
         }, open: function (p) {
@@ -97,7 +105,15 @@ layui.define(["jquery", "layer"], function (f) {
                 p.skin = "layui-layer-admin"
             }
             if (!p.offset) {
-                p.offset = "35px"
+                if (m.getPageWidth() < 768) {
+                    p.offset = "15px"
+                } else {
+                    if (window == top) {
+                        p.offset = "70px"
+                    } else {
+                        p.offset = "40px"
+                    }
+                }
             }
             if (p.fixed == undefined) {
                 p.fixed = false
@@ -123,31 +139,38 @@ layui.define(["jquery", "layer"], function (f) {
             return j.open(p)
         }, req: function (n, o, p, q) {
             m.ajax({url: n, data: o, type: q, dataType: "json", success: p})
-        }, ajax: function (o) {
-            var n = o.success;
-            o.success = function (p, q, s) {
-                var r;
-                if ("json" == o.dataType.toLowerCase()) {
-                    r = p
+        }, ajax: function (p) {
+            var o = p.header;
+            p.dataType || (p.dataType = "json");
+            var n = p.success;
+            p.success = function (q, r, t) {
+                var s;
+                if ("json" == p.dataType.toLowerCase()) {
+                    s = q
                 } else {
-                    r = m.parseJSON(p)
+                    s = m.parseJSON(q)
                 }
-                r && (r = p);
-                if (m.ajaxSuccessBefore(r, o.url) == false) {
+                s && (s = q);
+                if (m.ajaxSuccessBefore(s, p.url) == false) {
                     return
                 }
-                n(p, q, s)
+                n(q, r, t)
             };
-            o.error = function (p) {
-                o.success({code: p.status, msg: p.statusText})
+            p.error = function (q) {
+                p.success({code: q.status, msg: q.statusText})
             };
-            o.beforeSend = function (r) {
-                var q = m.getAjaxHeaders(o.url);
-                for (var p = 0; p < q.length; p++) {
-                    r.setRequestHeader(q[p].name, q[p].value)
+            p.beforeSend = function (t) {
+                var s = m.getAjaxHeaders(p.url);
+                for (var q = 0; q < s.length; q++) {
+                    t.setRequestHeader(s[q].name, s[q].value)
+                }
+                if (o) {
+                    for (var r in o) {
+                        t.setRequestHeader(r, o[r])
+                    }
                 }
             };
-            h.ajax(o)
+            h.ajax(p)
         }, parseJSON: function (p) {
             if (typeof p == "string") {
                 try {
@@ -388,7 +411,7 @@ layui.define(["jquery", "layer"], function (f) {
             }
             return n
         }, hideTableScrollBar: function (p) {
-            if (m.getPageWidth() > 750) {
+            if (m.getPageWidth() > 768) {
                 if (!p) {
                     var o = h(k + ">.layui-tab-content>.layui-tab-item.layui-show>.admin-iframe");
                     if (o.length <= 0) {
@@ -475,6 +498,25 @@ layui.define(["jquery", "layer"], function (f) {
                 }
             }
             return p
+        }, parseLayerOption: function (p) {
+            for (var q in p) {
+                if (p[q] && p[q].toString().indexOf(",") != -1) {
+                    p[q] = p[q].toString().split(",")
+                }
+            }
+            var n = ["success", "cancel", "end", "full", "min", "restore"];
+            for (var o = 0; o < n.length; o++) {
+                for (var q in p) {
+                    if (q == n[o]) {
+                        p[q] = window[p[q]]
+                    }
+                }
+            }
+            if (p.content && (typeof p.content === "string") && p.content.indexOf("#") == 0) {
+                p.content = h(p.content).html()
+            }
+            (p.type == undefined) && (p.type = 2);
+            return p
         }, ajaxSuccessBefore: function (n, o) {
             return true
         }, getAjaxHeaders: function (n) {
@@ -532,28 +574,10 @@ layui.define(["jquery", "layer"], function (f) {
             })
         }, open: function () {
             var n = h(this).data();
-            (n.type == undefined) && (n.type = 2);
-            for (var o in n) {
-                if (n[o] && n[o].toString().indexOf(",") != -1) {
-                    n[o] = n[o].toString().split(",")
-                }
-            }
-            if (n.content && (typeof n.content === "string") && n.content.indexOf("#") == 0) {
-                n.content = h(n.content).html()
-            }
-            m.strToWin(n.window).layui.admin.open(n)
+            m.strToWin(n.window).layui.admin.open(m.parseLayerOption(m.util.deepClone(n)))
         }, popupRight: function () {
             var n = h(this).data();
-            (n.type == undefined) && (n.type = 2);
-            for (var o in n) {
-                if (n[o] && n[o].toString().indexOf(",") != -1) {
-                    n[o] = n[o].toString().split(",")
-                }
-            }
-            if (n.content && (typeof n.content === "string") && n.content.indexOf("#") == 0) {
-                n.content = h(n.content).html()
-            }
-            m.strToWin(n.window).layui.admin.popupRight(n)
+            m.strToWin(n.window).layui.admin.popupRight(m.parseLayerOption(m.util.deepClone(n)))
         }, fullScreen: function () {
             var u = "layui-icon-screen-full", n = "layui-icon-screen-restore";
             var r = h(this).find("i");
@@ -587,7 +611,8 @@ layui.define(["jquery", "layer"], function (f) {
         }, rightPage: function () {
             m.strToWin(h(this).data("window")).layui.admin.rollPage()
         }, closeThisTabs: function () {
-            m.strToWin(h(this).data("window")).layui.admin.closeThisTabs()
+            var n = h(this).data("url");
+            m.strToWin(h(this).data("window")).layui.admin.closeThisTabs(n)
         }, closeOtherTabs: function () {
             m.strToWin(h(this).data("window")).layui.admin.closeOtherTabs()
         }, closeAllTabs: function () {
@@ -916,9 +941,122 @@ layui.define(["jquery", "layer"], function (f) {
             })
         })
     };
+    m.util = {
+        Convert_BD09_To_GCJ02: function (o) {
+            var q = (3.141592653589793 * 3000) / 180;
+            var n = o.lng - 0.0065, s = o.lat - 0.006;
+            var r = Math.sqrt(n * n + s * s) - 0.00002 * Math.sin(s * q);
+            var p = Math.atan2(s, n) - 0.000003 * Math.cos(n * q);
+            o.lng = r * Math.cos(p);
+            o.lat = r * Math.sin(p);
+            return o
+        }, Convert_GCJ02_To_BD09: function (o) {
+            var q = (3.141592653589793 * 3000) / 180;
+            var n = o.lng, s = o.lat;
+            var r = Math.sqrt(n * n + s * s) + 0.00002 * Math.sin(s * q);
+            var p = Math.atan2(s, n) + 0.000003 * Math.cos(n * q);
+            o.lng = r * Math.cos(p) + 0.0065;
+            o.lat = r * Math.sin(p) + 0.006;
+            return o
+        }, animateNum: function (D, x, F, v) {
+            var r = h(D);
+            var s = r.text().replace(/,/g, "");
+            x = x === null || x === undefined || x === true || x === "true";
+            F = isNaN(F) ? 500 : F;
+            v = isNaN(v) ? 100 : v;
+            var z = "INPUT,TEXTAREA".indexOf(r.get(0).tagName) >= 0;
+            var t = function (J) {
+                var H = "";
+                for (var I = 0; I < J.length; I++) {
+                    if (!isNaN(J.charAt(I))) {
+                        return H
+                    } else {
+                        H += J.charAt(I)
+                    }
+                }
+            }, A = function (J) {
+                var H = "";
+                for (var I = J.length - 1; I >= 0; I--) {
+                    if (!isNaN(J.charAt(I))) {
+                        return H
+                    } else {
+                        H = J.charAt(I) + H
+                    }
+                }
+            }, C = function (I, H) {
+                if (!H) {
+                    return I
+                }
+                if (!/^[0-9]+.?[0-9]*$/.test(I)) {
+                    return I
+                }
+                I = I.toString();
+                return I.replace(I.indexOf(".") > 0 ? /(\d)(?=(\d{3})+(?:\.))/g : /(\d)(?=(\d{3})+(?:$))/g, "$1,")
+            };
+            var G = t(s.toString());
+            var p = A(s.toString());
+            var q = s.toString().replace(G, "").replace(p, "");
+            if (isNaN(q) || q === 0) {
+                z ? r.val(s) : r.html(s);
+                console.error("非法数值！");
+                return
+            }
+            var u = q.split(".");
+            var o = u[1] ? u[1].length : 0;
+            var n = 0, y = q;
+            if (Math.abs(y) > 10) {
+                n = parseFloat(u[0].substring(0, u[0].length - 1) + (u[1] ? ".0" + u[1] : ""))
+            }
+            var w = (y - n) / v, E = 0;
+            var B = setInterval(function () {
+                var H = G + C(n.toFixed(o), x) + p;
+                z ? r.val(H) : r.html(H);
+                n += w;
+                E++;
+                if (Math.abs(n) >= Math.abs(y) || E > 5000) {
+                    H = G + C(y, x) + p;
+                    z ? r.val(H) : r.html(H);
+                    clearInterval(B)
+                }
+            }, F / v)
+        }, deepClone: function (q) {
+            var n;
+            var o = m.util.isClass(q);
+            if (o === "Object") {
+                n = {}
+            } else {
+                if (o === "Array") {
+                    n = []
+                } else {
+                    return q
+                }
+            }
+            for (var p in q) {
+                var r = q[p];
+                if (m.util.isClass(r) == "Object") {
+                    n[p] = arguments.callee(r)
+                } else {
+                    if (m.util.isClass(r) == "Array") {
+                        n[p] = arguments.callee(r)
+                    } else {
+                        n[p] = q[p]
+                    }
+                }
+            }
+            return n
+        }, isClass: function (n) {
+            if (n === null) {
+                return "Null"
+            }
+            if (n === undefined) {
+                return "Undefined"
+            }
+            return Object.prototype.toString.call(n).slice(8, -1)
+        }
+    };
     var l = ".layui-layout-admin.admin-nav-mini>.layui-side .layui-nav .layui-nav-item";
     h(document).on("mouseenter", l + "," + l + " .layui-nav-child>dd", function () {
-        if (m.getPageWidth() > 750) {
+        if (m.getPageWidth() > 768) {
             var o = h(this), q = o.find(">.layui-nav-child");
             if (q.length > 0) {
                 o.addClass("admin-nav-hover");
@@ -926,16 +1064,17 @@ layui.define(["jquery", "layer"], function (f) {
                 var p = o.offset().top;
                 if (p + q.outerHeight() > m.getPageHeight()) {
                     p = p - q.outerHeight() + o.outerHeight();
-                    (p < 0) && (p = 10);
+                    (p < 60) && (p = 60);
                     q.addClass("show-top")
                 }
-                q.css("top", p)
+                q.css("top", p);
+                q.addClass("ew-anim-drop-in")
             } else {
                 if (o.hasClass("layui-nav-item")) {
                     var n = o.find("cite").text();
                     j.tips(n, o, {
                         tips: [2, "#303133"], time: -1, success: function (r, s) {
-                            h(r).css("margin-top", "15px")
+                            h(r).css("margin-top", "12px")
                         }
                     })
                 }
@@ -943,8 +1082,11 @@ layui.define(["jquery", "layer"], function (f) {
         }
     }).on("mouseleave", l + "," + l + " .layui-nav-child>dd", function () {
         j.closeAll("tips");
-        h(this).removeClass("admin-nav-hover");
-        h(this).find(">.layui-nav-child").removeClass("show-top")
+        var o = h(this);
+        o.removeClass("admin-nav-hover");
+        var n = o.find(">.layui-nav-child");
+        n.removeClass("show-top ew-anim-drop-in");
+        n.css({"left": "unset", "top": "unset"})
     });
     h(document).on("click", "*[ew-event]", function () {
         var n = h(this).attr("ew-event");
@@ -969,6 +1111,11 @@ layui.define(["jquery", "layer"], function (f) {
     }).on("mouseleave", "*[lay-tips]", function () {
         j.closeAll("tips")
     });
+    if (m.getPageWidth() < 768) {
+        if (layui.device().os == "windows") {
+            h("body").append("<style>@media screen and (max-width: 768px) {::-webkit-scrollbar{width:8px;height:9px;background:transparent}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{border-radius:5px;background-color:#c1c1c1}::-webkit-scrollbar-thumb:hover{background-color:#a8a8a8}.mini-bar::-webkit-scrollbar{width:5px;height:5px}.mini-bar::-webkit-scrollbar-thumb{border-radius:3px}}</style>")
+        }
+    }
     h(document).on("click", "*[ew-href]", function () {
         var n = h(this).attr("ew-href");
         var o = h(this).attr("ew-title");

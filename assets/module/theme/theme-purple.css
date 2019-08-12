@@ -11,6 +11,7 @@
 .layui-layout-admin .layui-header .layui-logo {
     background-color: #722ED1;
     color: #fff;
+    box-shadow: none !important;
 }
 
 /** header样式 */
@@ -183,11 +184,15 @@
 
 /** 复选框 */
 .layui-form-checked[lay-skin=primary] i {
-    border-color: #722ED1;
+    border-color: #722ED1 !important;
     background-color: #722ED1;
 }
 
 .layui-form-checkbox[lay-skin=primary] i:hover {
+    border-color: #722ED1;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i {
     border-color: #722ED1;
 }
 

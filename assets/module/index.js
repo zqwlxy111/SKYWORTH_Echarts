@@ -1,4 +1,4 @@
-﻿/** EasyWeb iframe v3.1.3 date:2019-07-12 License By http://easyweb.vip */
+/** EasyWeb iframe v3.1.4 date:2019-07-12 License By http://easyweb.vip */
 
 layui.define(["layer", "element", "admin"], function (s) {
     var d = layui.jquery;
@@ -94,7 +94,7 @@ layui.define(["layer", "element", "admin"], function (s) {
                     m.putTempData("tabPosition", h.mTabPosition)
                 }
             }
-            if (m.getPageWidth() <= 750) {
+            if (m.getPageWidth() <= 768) {
                 m.flexible(true)
             }
         },
@@ -259,8 +259,8 @@ layui.define(["layer", "element", "admin"], function (s) {
         e += '       <ul class="layui-tab-title"></ul>';
         e += '      <div class="layui-tab-content"></div>';
         e += "   </div>";
-        e += '   <div class="layui-icon admin-tabs-control layui-icon-prev" ew-event="leftPage"></div>';
-        e += '   <div class="layui-icon admin-tabs-control layui-icon-next" ew-event="rightPage"></div>';
+        /*e += '   <div class="layui-icon admin-tabs-control layui-icon-prev" ew-event="leftPage"></div>';
+        e += '   <div class="layui-icon admin-tabs-control layui-icon-next" ew-event="rightPage"></div>';*/
         e += '   <div class="layui-icon admin-tabs-control layui-icon-down">';
         e += '      <ul class="layui-nav admin-tabs-select" lay-filter="admin-pagetabs-nav">';
         e += '         <li class="layui-nav-item" lay-unselect>';
@@ -287,13 +287,6 @@ layui.define(["layer", "element", "admin"], function (s) {
             var u = v.attr("ew-title");
             u || (u = v.text().replace(/(^\s*)|(\s*$)/g, ""));
             h.loadView({menuId: x, menuPath: t, menuName: u})
-        }
-        if ("true" == (d(o + ">.layui-nav-tree").attr("lay-accordion"))) {
-            if ((v.parent().hasClass("layui-nav-itemed")) || (v.parent().hasClass("layui-this"))) {
-                d(o + ">.layui-nav .layui-nav-itemed").not(v.parents(".layui-nav-child").parent()).removeClass("layui-nav-itemed");
-                v.parent().addClass("layui-nav-itemed")
-            }
-            v.trigger("mouseenter")
         }
     });
     b.on("tab(" + i + ")", function (v) {
@@ -334,7 +327,7 @@ layui.define(["layer", "element", "admin"], function (s) {
         var t = d(this).attr("nav-bind");
         d('ul[lay-filter="' + p + '"]').addClass("layui-hide");
         d('ul[nav-id="' + t + '"]').removeClass("layui-hide");
-        if (m.getPageWidth() <= 750) {
+        if (m.getPageWidth() <= 768) {
             m.flexible(false)
         }
         d(a + ">.layui-nav .layui-nav-item").removeClass("layui-this");

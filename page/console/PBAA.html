@@ -151,7 +151,7 @@
                     <Row>
                         <i-col span="24">
                             <Card style="margin-top: 5px ; margin-left: 5px">
-                                <i-Table stripe border :columns="columns1" :data="data1"></i-Table>
+                                <i-Table stripe border max-height="395" :columns="columns1" :data="data1"></i-Table>
                             </Card>
                         </i-col>
                     </Row>
@@ -160,29 +160,10 @@
             <Row>
                 <i-col span="24">
                     <Card style="margin-top: 5px ;">
-                        <i-Table stripe border :columns="columns2" :data="data2"></i-Table>
+                        <i-Table stripe border max-height="290" :columns="columns2" :data="data2"></i-Table>
                     </Card>
                 </i-col>
             </Row>
-            <!--<Row>
-                <i-col span="12" >
-                    <Card style="margin-top: 7px"></Card>
-                </i-col>
-                <i-col span="12">
-                    <Row>
-                        <i-col span="24">
-                            <Card style="margin-top: 7px; margin-left: 5px"></Card>
-                        </i-col>
-                        <i-col span="24">
-                            <Card style="margin-top: 5px; margin-left: 5px"></Card>
-                        </i-col>
-                        <i-col span="24">
-                            <Card style="margin-top: 5px; margin-left: 5px"></Card>
-                        </i-col>
-                    </Row>
-
-                </i-col>
-            </Row>-->
         </div>
     </template>
 </div>
@@ -356,7 +337,7 @@
                 },
                 {
                     title: '历史产出',
-                    key: 'hiswgmng',
+                    key: 'hisWgmng',
                     align: 'center'
                 },
                 {
@@ -370,13 +351,18 @@
                     align: 'center'
                 },
                 {
-                    title: '今日计划达成率',
-                    key: 'todayPlanAchin',
+                    title: '计划达成率',
+                    key: 'planAchin',
                     align: 'center'
                 },
                 {
                     title: '今日不良',
                     key: 'todayYcmng',
+                    align: 'center'
+                },
+                {
+                    title: '累计异常量',
+                    key: 'ycmng',
                     align: 'center'
                 },
                 {
@@ -462,6 +448,11 @@
                         console.log(sta.value);
                         vm.data2 = [];
                         vm.data2 = e.result;
+                        for (let i = 0; i < vm.data2.length; i++) {
+                            vm.data2[i].hisWgmng = vm.data2[i].wgmng - vm.data2[i].todayWgmng;
+                            vm.data2[i].planAchin = toPercent(vm.data2[i].wgmng / vm.data2[i].gamng);
+                            vm.data2[i].todayPass = vm.data2[i].wgmng == 0? toPercent(0) : toPercent((1-(vm.data2[i].ycmng / vm.data2[i].wgmng)));
+                        }
                     })
                 }
 

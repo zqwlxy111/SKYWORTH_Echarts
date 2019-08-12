@@ -86,10 +86,16 @@
 }
 
 /** admin风格弹窗样式 */
+.layui-layer.layui-layer-admin {
+    border-radius: 6px;
+}
+
 .layui-layer.layui-layer-admin .layui-layer-title {
     background-color: #fff;
     color: #333;
     border-bottom: 1px solid #eee;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 /** 按钮颜色 */
@@ -199,11 +205,15 @@
 
 /** 复选框 */
 .layui-form-checked[lay-skin=primary] i {
-    border-color: #1890FF;
+    border-color: #1890FF !important;
     background-color: #1890FF;
 }
 
 .layui-form-checkbox[lay-skin=primary] i:hover {
+    border-color: #1890FF;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i {
     border-color: #1890FF;
 }
 

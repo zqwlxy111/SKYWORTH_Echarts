@@ -1,6 +1,6 @@
 /**
  * 文件选择扩展模块
- * date:2019-07-12   License By http://easyweb.vip
+ * date:2019-08-03   License By http://easyweb.vip
  */
 layui.define(['jquery', 'layer', 'form', 'upload', 'util'], function (exports) {
     var $ = layui.jquery;
@@ -348,8 +348,8 @@ layui.define(['jquery', 'layer', 'form', 'upload', 'util'], function (exports) {
                 }
                 if (!operMenu) {
                     html += '<div class="file-choose-oper-menu">';
-                    html += '   <div class="file-choose-oper-menu-item" data-event="choose">选择</div>';
                     html += '   <div class="file-choose-oper-menu-item" data-event="preview">预览</div>';
+                    html += '   <div class="file-choose-oper-menu-item" data-event="choose">选择</div>';
                     html += '</div>';
                 } else if (operMenu.length > 0) {
                     html += '<div class="file-choose-oper-menu">';
@@ -397,7 +397,7 @@ layui.define(['jquery', 'layer', 'form', 'upload', 'util'], function (exports) {
         return type;
     };
 
-    $('body').append('<style>.layer-file-choose { max-width: 100%;}</style>');
+    $('body').append('<style>.layer-file-choose { max-width: 100%;}@media screen and (max-width:768px){.layer-file-choose{max-width:98%;max-width:-moz-calc(100% - 30px);max-width:-webkit-calc(100% - 30px);max-width:calc(100% - 30px);left:0!important;right:0!important;margin:auto!important;margin-bottom:15px!important}}</style>');
     exports("fileChoose", fileChoose);
 });
 

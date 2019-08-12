@@ -1,4 +1,8 @@
-﻿/** EasyWeb iframe v3.1.3 date:2019-07-15 License By http://easyweb.vip */
+﻿/** EasyWeb iframe v3.1.4 date:2019-08-05 License By http://easyweb.vip */
+
+* {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+}
 
 html {
     background-color: #f2f2f2
@@ -20,7 +24,7 @@ html {
     right: 0;
     top: 0;
     bottom: 0;
-    transition: all .3s
+    transition: all .3s ease
 }
 
 .layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
@@ -93,24 +97,29 @@ html {
 
 .layui-layout-admin .layui-header .layui-logo {
     width: 220px;
-    background-color: #2b2d36;
+    background-color: #24262f;
     color: #f2f2f2;
     font-size: 18px;
     font-family: Myriad Pro, Helvetica Neue, Arial, Helvetica, sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     overflow: hidden;
     line-height: 50px;
     transition: all .3s;
     white-space: nowrap;
+    vertical-align: middle;
     box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .05)
 }
 
 .layui-layout-admin .layui-header .layui-logo img {
-    height: 35px
+    height: 35px;
+    vertical-align: middle
 }
 
 .layui-layout-admin .layui-header .layui-logo cite {
-    font-style: normal
+    font-style: normal;
+    vertical-align: middle;
+    height: 35px;
+    line-height: 35px
 }
 
 .layui-layout-admin .layui-header .layui-nav-img {
@@ -177,13 +186,26 @@ html {
     bottom: 0
 }
 
+.layui-nav-tree .layui-nav-itemed > .layui-nav-child {
+    display: none
+}
+
+.layui-nav-tree .layui-nav-item .layui-nav-child {
+    padding: 5px 0;
+    background-color: rgba(0, 0, 0, .2) !important
+}
+
+.layui-nav-tree .layui-nav-bar {
+    width: 4px
+}
+
 .layui-layout-admin .layui-side {
     position: absolute;
     top: 50px;
     width: 220px;
     background-color: #24262f;
-    transition: all .3s;
     -webkit-transition: all .3s;
+    transition: all .3s;
     box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .05);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -206,8 +228,8 @@ html {
 }
 
 .layui-layout-admin .layui-side .layui-nav .layui-nav-item > a {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     cursor: pointer
 }
 
@@ -216,13 +238,11 @@ html {
 }
 
 .layui-layout-admin .layui-side .layui-nav .layui-nav-item a {
-    transition: none;
-    -webkit-transition: none
+    -webkit-transition: color .3s, background-color .3s;
+    transition: color .3s, background-color .3s
 }
 
-.layui-layout-admin .layui-side .layui-nav .layui-nav-itemed > .layui-nav-child {
-    padding: 5px 0;
-    background-color: rgba(0, 0, 0, .2) !important;
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item > .layui-nav-child {
     position: static
 }
 
@@ -247,7 +267,7 @@ html {
     padding-left: 110px
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 768px) {
     .layui-layout-admin.admin-nav-mini .layui-header .layui-logo {
         width: 60px
     }
@@ -277,7 +297,7 @@ html {
     }
 
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .layui-nav-item > a > .layui-icon {
-        font-size: 18px;
+        font-size: 16px;
         transition: font-size .3s;
         -webkit-transition: font-size .3s
     }
@@ -295,7 +315,7 @@ html {
     }
 
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .layui-nav-itemed .layui-nav-child {
-        display: none
+        display: none !important
     }
 
     .layui-layout-admin.admin-nav-mini .layui-body {
@@ -312,12 +332,12 @@ html {
 
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .admin-nav-hover > .layui-nav-child {
         position: fixed;
-        top: 0;
+        top: 60px;
         left: 60px;
         background: transparent !important;
         min-width: 150px;
         padding: 5px;
-        display: block
+        display: block !important
     }
 
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .admin-nav-hover > .layui-nav-child:before {
@@ -345,39 +365,66 @@ html {
     }
 
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more {
-        border-color: transparent transparent transparent rgba(255, 255, 255, .7) !important;
-        right: 7px !important;
-        margin-top: -6px !important
+        border-color: transparent transparent transparent rgba(255, 255, 255, .7);
+        right: 7px;
+        margin-top: -6px
     }
 
-    .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow2 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more {
-        top: 18px !important;
-        transform: rotate(-90deg) !important;
-        -ms-transform: rotate(-90deg) !important;
-        -moz-transform: rotate(-90deg) !important;
-        -webkit-transform: rotate(-90deg) !important;
-        -o-transform: rotate(-90deg) !important
+    .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow2 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more, .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow3 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more {
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        width: 6px;
+        height: 10px;
+        margin-top: -5px;
+        right: 10px;
+        font-weight: 600
     }
 
-    .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow3 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more {
-        top: 18px !important;
-        transform: rotate(0deg) !important;
-        -ms-transform: rotate(0deg) !important;
-        -moz-transform: rotate(0deg) !important;
-        -webkit-transform: rotate(0deg) !important;
-        -o-transform: rotate(0deg) !important
+    .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow2 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more:before, .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow3 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more:before {
+        content: "\e602";
+        left: -4px;
+        top: -2px
     }
 
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav.arrow3 .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more:before {
-        content: "\e602" !important;
-        background: transparent !important;
-        height: unset !important;
-        width: unset !important;
-        vertical-align: baseline !important
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
     }
+
+    .ew-anim-drop-in {
+        -webkit-animation: ewTransitionDropIn .3s ease-in-out;
+        animation: ewTransitionDropIn .3s ease-in-out;
+        transform-origin: 0 0
+    }
+
+    @-webkit-keyframes ewTransitionDropIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }@keyframes ewTransitionDropIn {
+         from {
+             opacity: 0;
+             transform: scale(0.8)
+         }
+         to {
+             opacity: 1;
+             transform: scale(1)
+         }
+     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
     .layui-layout-admin {
         left: -220px
     }
@@ -585,36 +632,37 @@ html {
 .layui-nav.arrow2 .layui-nav-more {
     font-family: layui-icon !important;
     font-size: 12px;
+    font-weight: 600;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
-    width: auto;
-    height: auto;
     line-height: normal;
     border: 0;
-    top: 23px;
     margin: 0;
     padding: 0;
+    width: 10px;
+    height: 6px;
+    top: 50%;
+    margin-top: -3px;
     display: inline-block;
-    transition: all .1s;
-    -webkit-transition: all .1s
-}
-
-.layui-nav.arrow2 .layui-nav-child .layui-nav-more {
-    top: 13px
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease
 }
 
 .layui-nav.arrow2 .layui-nav-more:before {
-    content: "\e61a"
+    content: "\e61a";
+    position: absolute;
+    right: -1px;
+    top: -4px
 }
 
 .layui-nav.arrow2 .layui-nav-itemed > a > .layui-nav-more {
-    transform: rotate(-180deg);
     -ms-transform: rotate(-180deg);
     -moz-transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
-    -o-transform: rotate(-180deg)
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg)
 }
 
 .layui-nav.arrow3 .layui-nav-more {
@@ -624,34 +672,32 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
-    width: auto;
-    height: auto;
     line-height: normal;
     border: 0;
-    top: 23px;
     margin: 0;
     padding: 0;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    margin-top: -5px;
     display: inline-block;
-    transition: all .1s;
-    -webkit-transition: all .1s
-}
-
-.layui-nav.arrow3 .layui-nav-child .layui-nav-more {
-    top: 13px
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease
 }
 
 .layui-nav.arrow3 .layui-nav-more:before {
-    content: "\e654"
+    content: "\e654";
+    position: absolute;
+    top: -2px;
+    left: -1px
 }
 
 .layui-nav.arrow3 .layui-nav-itemed > a > .layui-nav-more {
-    transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    width: 12px;
-    text-align: center
+    -ms-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg)
 }
 
 .layui-nav.arrow3 .layui-nav-itemed > a > .layui-nav-more:before {
@@ -659,8 +705,13 @@ html {
     width: 8px;
     height: 2px;
     background-color: rgba(255, 255, 255, .7);
-    display: inline-block;
-    vertical-align: middle
+    top: 4px;
+    left: 1px;
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg)
 }
 
 .page-loading {
@@ -805,7 +856,7 @@ html {
     left: 42px
 }
 
-@keyframes signal-load {
+@-webkit-keyframes signal-load {
     0% {
         height: 0
     }
@@ -817,7 +868,7 @@ html {
     }
 }
 
-@-webkit-keyframes signal-load {
+@keyframes signal-load {
     0% {
         height: 0
     }
@@ -852,7 +903,7 @@ html {
     left: 27px
 }
 
-@keyframes signal-load-sm {
+@-webkit-keyframes signal-load-sm {
     0% {
         height: 0
     }
@@ -864,7 +915,7 @@ html {
     }
 }
 
-@-webkit-keyframes signal-load-sm {
+@keyframes signal-load-sm {
     0% {
         height: 0
     }
@@ -922,6 +973,54 @@ html {
     box-shadow: 1px 1px 50px rgba(0, 0, 0, .3) !important;
     border: none !important;
     overflow: auto
+}
+
+@-webkit-keyframes layui-rl {
+    from {
+        -webkit-transform: translate3d(100%, 0, 0)
+    }
+    to {
+        -webkit-transform: translate3d(0, 0, 0)
+    }
+}
+
+@keyframes layui-rl {
+    from {
+        transform: translate3d(100%, 0, 0)
+    }
+    to {
+        transform: translate3d(0, 0, 0)
+    }
+}
+
+.layui-anim-rl {
+    -webkit-animation-name: layui-rl;
+    animation-name: layui-rl
+}
+
+@-webkit-keyframes layui-lr {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        opacity: 1
+    }
+    to {
+        -webkit-transform: translate3d(100%, 0, 0);
+        opacity: 1
+    }
+}
+
+@keyframes layui-lr {
+    from {
+        transform: translate3d(0, 0, 0)
+    }
+    to {
+        transform: translate3d(100%, 0, 0)
+    }
+}
+
+.layui-anim-lr, .layui-anim-rl.layer-anim-close {
+    -webkit-animation-name: layui-lr;
+    animation-name: layui-lr
 }
 
 .layui-layer.layui-layer-admin {
@@ -993,6 +1092,24 @@ html {
 .layui-layer-iframe .layui-layer-content {
     overflow: auto;
     -webkit-overflow-scrolling: touch
+}
+
+@media screen and (max-width: 768px) {
+    .layui-layer-admin {
+        max-width: 98%;
+        max-width: -moz-calc(100% - 30px);
+        max-width: -webkit-calc(100% - 30px);
+        max-width: calc(100% - 30px);
+        left: 0 !important;
+        right: 0 !important;
+        margin: auto !important;
+        margin-bottom: 15px !important
+    }
+
+    .layui-layer-admin[area] {
+        max-width: 100%;
+        margin-bottom: 0 !important
+    }
 }
 
 .layui-layer-msg {
@@ -1195,7 +1312,7 @@ html {
     text-decoration: none
 }
 
-span .layui-icon {
+span.icon-text .layui-icon {
     font-size: 14px;
     margin-left: 2px
 }
@@ -1228,7 +1345,7 @@ span .layui-icon {
     overflow: hidden !important
 }
 
-.layui-disabled, .layui-disabled:hover {
+input.layui-disabled, input.layui-disabled:hover {
     color: #545454 !important;
     background-color: #eee
 }
@@ -1279,40 +1396,34 @@ span .layui-icon {
     display: none !important
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background: transparent
-}
-
-::-webkit-scrollbar-track {
-    background: transparent
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: #c1c1c1
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: #a8a8a8
-}
-
-@media screen and (max-width: 750px) {
+@media screen and (min-width: 768px) {
     ::-webkit-scrollbar {
+        width: 8px;
+        height: 9px;
+        background: transparent
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #c1c1c1
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #a8a8a8
+    }
+
+    .mini-bar::-webkit-scrollbar {
         width: 5px;
         height: 5px
     }
-}
 
-.mini-bar::-webkit-scrollbar {
-    width: 5px;
-    height: 5px
-}
-
-.layui-nav-item.admin-nav-hover > .layui-nav-child::-webkit-scrollbar {
-    width: 3px;
-    height: 3px
+    .mini-bar::-webkit-scrollbar-thumb {
+        border-radius: 3px
+    }
 }
 
 #ew-map-select-map {
@@ -1499,6 +1610,28 @@ span .layui-icon {
     margin: 0
 }
 
+.table-tool-mini.full-table .layui-table-tool {
+    top: -35px;
+    height: 1px;
+    padding: 0 10px;
+    background: transparent;
+    border: 0
+}
+
+.table-tool-mini.full-table .layui-table-tool:before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    right: 0;
+    left: 0;
+    height: 36px;
+    background-color: #f2f2f2;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border: 1px solid #e6e6e6;
+    border-bottom: 0
+}
+
 .layui-badge-list .layui-badge {
     margin-right: 6px
 }
@@ -1571,30 +1704,49 @@ body .layui-layer-tips i.layui-layer-TipsR {
 }
 
 body .layui-layer-tips.layui-table-tips .layui-layer-content {
-    background: 0 0;
+    background: 0;
     padding: 0;
     box-shadow: 0 1px 6px rgba(0, 0, 0, .12);
-    line-height: 22px;
+    line-height: 22px
 }
 
-.table-tool-mini.full-table .layui-table-tool {
-    top: -35px;
-    height: 1px;
-    padding: 0 10px;
-    background: transparent;
-    border: none;
+body .layui-util-face .layui-layer-content {
+    padding: 0;
+    background-color: #fff;
+    box-shadow: none
 }
 
-.table-tool-mini.full-table .layui-table-tool:before {
-    content: "";
-    position: absolute;
-    top: -3px;
-    right: 0;
-    left: 0;
-    height: 36px;
-    background-color: #f2f2f2;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-    border: 1px solid #e6e6e6;
-    border-bottom: none;
+@media screen and (max-width: 768px) {
+    .layui-laydate-range {
+        left: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin: 10px auto !important;
+        max-width: 95%
+    }
+
+    .layui-laydate-range .layui-laydate-main, .layui-laydate-range .layui-laydate-content table {
+        width: 100%
+    }
+
+    .layui-laydate-range .laydate-main-list-0 .laydate-next-m, .layui-laydate-range .laydate-main-list-0 .laydate-next-y, .layui-laydate-range .laydate-main-list-1 .laydate-prev-m, .layui-laydate-range .laydate-main-list-1 .laydate-prev-y {
+        display: inline-block !important
+    }
+
+    .layui-laydate-range .laydate-main-list-1 .layui-laydate-header {
+        border-top: 1px solid #e2e2e2
+    }
+
+    .layui-laydate-range .laydate-main-list-1 .layui-laydate-content {
+        border-left: none !important
+    }
+
+    .layui-laydate-range .laydate-time-list ol li {
+        padding-left: 0 !important;
+        text-align: center
+    }
+
+    .layui-laydate-range .laydate-time-list ol {
+        overflow: auto !important
+    }
 }

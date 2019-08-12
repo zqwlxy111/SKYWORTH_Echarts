@@ -4,13 +4,19 @@
 }
 
 .layui-layout-admin .layui-side .layui-nav .layui-nav-item > a:hover {
-    background: rgba(59, 116, 255, .02);
+    background: transparent;
+    color: #2d8cf0 !important;
+}
+
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item dd > a:hover {
+    color: #2d8cf0 !important;
 }
 
 /** logo部分样式 */
 .layui-layout-admin .layui-header .layui-logo {
     background-color: #fff;
-    color: #666;
+    color: #515A6E;
+    box-shadow: none !important;
 }
 
 /** header样式 */
@@ -19,53 +25,60 @@
 }
 
 .layui-layout-admin .layui-header a {
-    color: #555;
+    color: #515A6E;
 }
 
 .layui-layout-admin .layui-header a:hover {
-    color: #555;
+    color: #515A6E;
 }
 
 /** header里面三角箭头 */
 .layui-layout-admin .layui-header .layui-nav .layui-nav-more {
-    border-color: #666 transparent transparent;
+    border-color: #515A6E transparent transparent;
 }
 
 .layui-layout-admin .layui-header .layui-nav .layui-nav-mored {
-    border-color: transparent transparent #666;
+    border-color: transparent transparent #515A6E;
 }
 
 /** header线条 */
 .layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
-    background-color: #3B74FF;
+    background-color: #2d8cf0;
 }
 
 /** 侧边栏样式 */
 .layui-layout-admin .layui-side {
     background-color: #fff;
+    box-shadow: 0px 0 1px rgba(0, 0, 0, .05);
 }
 
 /** 侧边栏文字颜色 */
 .layui-side .layui-nav .layui-nav-item a {
-    color: #555;
+    color: #515A6E;
 }
 
 .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
-    background: rgba(59, 116, 255, .03);
-    color: #3B74FF !important;
+    background: #f0faff;
+    color: #2d8cf0 !important;
+    border-right: 1px solid #2d8cf0;
 }
 
 .layui-nav-tree .layui-nav-bar {
-    background-color: #3B74FF;
+    background-color: #2d8cf0;
     width: 4px;
+    display: none;
 }
 
 .layui-side .layui-nav-itemed > a, .layui-nav-tree .layui-nav-title a, .layui-nav-tree .layui-nav-title a:hover {
-    color: #555 !important;
+    color: #515A6E !important;
 }
 
 .layui-layout-admin.admin-nav-mini .layui-side .layui-nav li.layui-nav-itemed > a {
-    background: rgba(59, 116, 255, .03);
+    background: #f0faff;
+}
+
+.layui-nav-tree .layui-nav-item .layui-nav-child {
+    background-color: #fff !important;
 }
 
 .layui-layout-admin .layui-side .layui-nav .layui-nav-itemed > .layui-nav-child {
@@ -75,15 +88,15 @@
 /** PC端折叠鼠标经过样式 */
 .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .admin-nav-hover > .layui-nav-child:before {
     background: #fff !important;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
 }
 
 .layui-layout-admin.admin-nav-mini .layui-side .layui-nav .admin-nav-hover > .layui-nav-child > dd > a .layui-nav-more {
-    border-color: transparent transparent transparent #999 !important;
+    border-color: transparent transparent transparent #515A6E !important;
 }
 
 /** 移动设备样式 */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
     .layui-layout-admin.admin-nav-mini .layui-side .layui-nav li.layui-nav-itemed > a {
         background: transparent;
     }
@@ -91,21 +104,25 @@
 
 /** 侧边栏小三角样式 */
 .layui-layout-admin .layui-side .layui-nav .layui-nav-more {
-    border-color: #999 transparent transparent;
+    border-color: #515A6E transparent transparent;
 }
 
 .layui-layout-admin .layui-side .layui-nav .layui-nav-itemed > a .layui-nav-more {
-    border-color: transparent transparent #999;
+    border-color: transparent transparent #515A6E;
 }
 
 .layui-nav.arrow3 .layui-nav-itemed > a > .layui-nav-more:before {
-    background-color: #888;
+    background-color: #515A6E;
 }
 
 /** tab下划线 */
 .layui-layout-admin .layui-body > .layui-tab > .layui-tab-title li.layui-this:after {
     background-color: #2486FF;
     /*top: 38px;*/
+}
+
+.admin-tabs-control, .layui-tab-title, .layui-tab-title .layui-this {
+    color: #515A6E;
 }
 
 /** 主体标题 */
@@ -119,20 +136,26 @@
 }
 
 /** admin风格弹窗样式 */
+.layui-layer.layui-layer-admin {
+    border-radius: 6px;
+}
+
 .layui-layer.layui-layer-admin .layui-layer-title {
     background-color: #fff;
     color: #333;
     border-bottom: 1px solid #eee;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 /** 按钮颜色 */
 .layui-layer.layui-layer-admin .layui-layer-setwin a {
-    color: #000;
+    color: #515A6E;
 }
 
 /* 最小化按钮 */
 .layui-layer.layui-layer-admin .layui-layer-setwin .layui-layer-min cite {
-    background-color: #555;
+    background-color: #515A6E;
 }
 
 /** 弹窗按钮 */
@@ -216,11 +239,15 @@
 
 /** 复选框 */
 .layui-form-checked[lay-skin=primary] i {
-    border-color: #2486FF;
+    border-color: #2486FF !important;
     background-color: #2486FF;
 }
 
 .layui-form-checkbox[lay-skin=primary] i:hover {
+    border-color: #2486FF;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i {
     border-color: #2486FF;
 }
 
